@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pregner.pro - Главная</title>
+    <title>Жанна Прегнер — Профессиональный РОП</title>
     <style>
         * {
             margin: 0;
@@ -11,60 +11,383 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+        html {
+            scroll-behavior: smooth;
         }
         
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 60px 40px;
-            max-width: 600px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 50%, #FFEB3B 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Плавающие лимоны на фоне */
+        .lemon {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+            z-index: 0;
+        }
+        
+        .lemon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .lemon:nth-child(2) { top: 60%; left: 80%; animation-delay: 5s; }
+        .lemon:nth-child(3) { top: 80%; left: 20%; animation-delay: 10s; }
+        .lemon:nth-child(4) { top: 30%; right: 15%; animation-delay: 15s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+        
+        /* Хедер */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            max-width: 700px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-content:hover {
+            transform: translateY(-10px);
         }
         
         h1 {
-            font-size: 48px;
+            font-size: 56px;
+            font-weight: 700;
+            color: #F9A825;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            color: #F57F17;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFEB3B 0%, #FBC02D 100%);
             color: #333;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(251, 192, 45, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(251, 192, 45, 0.6);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 40px;
+            opacity: 0.7;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+        
+        /* Секции */
+        section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            z-index: 1;
+        }
+        
+        .section-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h2 {
+            font-size: 42px;
+            color: #F9A825;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .about-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
             margin-bottom: 20px;
         }
         
-        p {
-            font-size: 18px;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 30px;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
         }
         
-        .button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
-            text-decoration: none;
+        .skill-card {
+            background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 3px solid #FFEB3B;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+        
+        .skill-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-title {
+            font-size: 20px;
             font-weight: 600;
-            transition: transform 0.2s;
+            color: #F57F17;
+            margin-bottom: 10px;
         }
         
-        .button:hover {
-            transform: translateY(-2px);
+        .skill-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Контакты */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #FFEB3B 0%, #FBC02D 100%);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(251, 192, 45, 0.3);
+        }
+        
+        .contact-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(251, 192, 45, 0.5);
+        }
+        
+        /* Футер */
+        footer {
+            position: relative;
+            background: rgba(249, 168, 37, 0.2);
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            z-index: 1;
+        }
+        
+        /* Адаптив */
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .subtitle { font-size: 18px; }
+            h2 { font-size: 32px; }
+            .hero-content, .section-content { padding: 40px 30px; }
+            .skills-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 Pregner.pro</h1>
-        <p>Добро пожаловать на наш сайт!</p>
-        <p>Сайт успешно запущен и готов к работе.</p>
-        <a href="#" class="button">Начать</a>
-    </div>
+    <!-- Плавающие лимоны -->
+    <div class="lemon">🍋</div>
+    <div class="lemon">🍋</div>
+    <div class="lemon">🍋</div>
+    <div class="lemon">🍋</div>
+    
+    <!-- Главный экран -->
+    <header>
+        <div class="hero-content">
+            <h1>Жанна Прегнер</h1>
+            <div class="subtitle">Профессиональный РОП</div>
+            <p class="tagline">
+                Превращаю амбициозные идеи в успешные проекты.<br>
+                Эффективное управление, креативный подход, гарантированный результат.
+            </p>
+            <a href="#about" class="cta-button">Узнать больше</a>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </header>
+    
+    <!-- О себе -->
+    <section id="about">
+        <div class="section-content">
+            <h2>🎯 Обо мне</h2>
+            <p class="about-text">
+                Я — руководитель отдела продаж с многолетним опытом построения эффективных команд 
+                и внедрения инновационных стратегий продаж.
+            </p>
+            <p class="about-text">
+                Моя специализация — создание прибыльных систем продаж с нуля, масштабирование бизнеса 
+                и достижение амбициозных KPI. Работаю с современными инструментами и технологиями, 
+                всегда в курсе трендов рынка.
+            </p>
+            <p class="about-text">
+                Верю, что успешные продажи — это искусство понимания клиента и создания ценности. 
+                Мой подход основан на данных, креативности и человечности.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Компетенции -->
+    <section id="skills">
+        <div class="section-content">
+            <h2>⚡ Мои суперсилы</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <div class="skill-title">Стратегия продаж</div>
+                    <div class="skill-desc">Разработка и внедрение эффективных стратегий для роста выручки</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <div class="skill-title">Управление командой</div>
+                    <div class="skill-desc">Построение и мотивация высокоэффективных команд продаж</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <div class="skill-title">Аналитика</div>
+                    <div class="skill-desc">Принятие решений на основе данных и метрик</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <div class="skill-title">Масштабирование</div>
+                    <div class="skill-desc">Рост бизнеса от стартапа до корпорации</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💡</div>
+                    <div class="skill-title">Инновации</div>
+                    <div class="skill-desc">Внедрение новых инструментов и технологий продаж</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🤝</div>
+                    <div class="skill-title">Переговоры</div>
+                    <div class="skill-desc">Ведение сложных переговоров с крупными клиентами</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Контакты -->
+    <section id="contact">
+        <div class="section-content">
+            <h2>📬 Свяжитесь со мной</h2>
+            <p class="about-text" style="text-align: center;">
+                Открыта к новым проектам и интересным предложениям.<br>
+                Давайте обсудим, как я могу помочь вашему бизнесу расти!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:contact@pregner.pro" class="contact-link">
+                    📧 Email
+                </a>
+                <a href="tel:+77777777777" class="contact-link">
+                    📱 Телефон
+                </a>
+                <a href="#" class="contact-link">
+                    💼 LinkedIn
+                </a>
+                <a href="#" class="contact-link">
+                    📱 Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 Жанна Прегнер. Все права защищены.</p>
+        <p style="margin-top: 10px; opacity: 0.7;">pregner.pro</p>
+    </footer>
+    
+    <script>
+        // Анимация появления секций при прокрутке
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section-content').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

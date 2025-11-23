@@ -768,24 +768,211 @@
         
         /* Адаптив */
         @media (max-width: 768px) {
-            h1 { font-size: 36px; }
-            .subtitle { font-size: 18px; }
-            h2 { font-size: 32px; }
+            /* Навигация */
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            .logo-tagline {
+                font-size: 10px;
+                text-align: center;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                align-items: center;
+            }
+            
+            .nav-links a {
+                font-size: 15px;
+            }
+            
+            .courses-button {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+            
+            /* Заголовки */
+            h1 { 
+                font-size: 42px;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle { 
+                font-size: 11px;
+                letter-spacing: 5px;
+                margin-bottom: 35px;
+            }
+            
+            h2 { 
+                font-size: 36px;
+                letter-spacing: 2px;
+                margin-bottom: 35px;
+            }
+            
+            .tagline {
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 35px;
+                padding: 0 10px;
+            }
+            
+            /* Hero секция */
             .hero-content { 
                 flex-direction: column; 
-                padding: 40px 30px; 
+                padding: 40px 25px;
+                gap: 35px;
             }
-            .hero-text { min-width: auto; }
+            
+            .hero-text { 
+                min-width: auto;
+                padding-top: 0;
+            }
+            
             .hero-photo { 
                 flex: 0 0 auto; 
                 width: 100%; 
-                max-width: 200px; 
+                max-width: 220px;
+                margin-right: 0;
             }
-            .hero-photo img { height: 260px; }
-            .section-content { padding: 40px 30px; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .about-content { flex-direction: column; }
-            .about-photo { flex: 0 0 auto; width: 100%; max-width: 300px; }
+            
+            .hero-photo img { 
+                height: 280px;
+            }
+            
+            .cta-button {
+                padding: 18px 40px;
+                font-size: 14px;
+                letter-spacing: 1.5px;
+            }
+            
+            /* Секции */
+            .section-content { 
+                padding: 40px 25px;
+            }
+            
+            .about-text {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            
+            /* Карточки */
+            .skills-grid { 
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .skill-card {
+                padding: 35px 25px;
+            }
+            
+            .skill-title {
+                font-size: 22px;
+            }
+            
+            .skill-desc {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+            
+            .skill-icon {
+                font-size: 42px;
+            }
+            
+            /* About секция */
+            .about-content { 
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .about-photo { 
+                flex: 0 0 auto; 
+                width: 100%; 
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            
+            .about-info {
+                min-width: auto;
+            }
+            
+            /* Контакты */
+            .contact-links {
+                gap: 15px;
+            }
+            
+            .contact-link {
+                padding: 14px 28px;
+                font-size: 15px;
+            }
+            
+            /* Модальное окно */
+            .modal-content {
+                margin: 40px 20px;
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+            
+            .modal h2 {
+                font-size: 36px;
+                margin-bottom: 30px;
+            }
+            
+            .courses-list {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .modal-course-card {
+                padding: 25px 20px;
+            }
+            
+            .modal-course-card h3 {
+                font-size: 18px;
+            }
+            
+            .modal-course-card p {
+                font-size: 13px;
+            }
+            
+            .close-modal {
+                top: 15px;
+                right: 20px;
+                font-size: 28px;
+            }
+            
+            /* Футер */
+            footer {
+                padding: 30px 20px;
+                font-size: 14px;
+            }
+            
+            /* Дополнительные блоки */
+            div[style*="margin-top: 60px"] {
+                margin-top: 40px !important;
+                padding: 30px 20px !important;
+            }
+            
+            div[style*="margin-top: 60px"] h3 {
+                font-size: 26px !important;
+            }
+            
+            div[style*="margin-top: 60px"] p {
+                font-size: 15px !important;
+            }
         }
     </style>
 </head>

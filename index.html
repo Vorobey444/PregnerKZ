@@ -1118,7 +1118,6 @@
             }
         });
         
-    <script>
         // Анимация появления секций при прокрутке
         const observerOptions = {
             threshold: 0.2,
@@ -1142,8 +1141,6 @@
         document.querySelectorAll('.section-content').forEach(section => {
             observer.observe(section);
         });
-        
-
         
         // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

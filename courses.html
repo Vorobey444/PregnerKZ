@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои курсы — Жанна Прегнер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0A0A0A;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Тонкие золотые блики */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(198, 166, 103, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(198, 166, 103, 0.03) 0%, transparent 40%);
+            animation: orangePulse 10s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes orangePulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        
+        /* Навигация */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 40px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(198, 166, 103, 0.2);
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant', serif;
+            font-size: 24px;
+            color: #C6A667;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #C6A667;
+        }
+        
+        /* Хедер страницы */
+        .page-header {
+            position: relative;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 150px 20px 80px;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-family: 'Cormorant', serif;
+            font-size: 85px;
+            font-weight: 400;
+            margin: 0 0 20px 0;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #FFFFFF 30%, #C6A667 50%, #FFFFFF 70%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-subtitle {
+            font-size: 18px;
+            color: #b8b8b8;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Секции курсов */
+        section {
+            position: relative;
+            padding: 60px 20px;
+            z-index: 1;
+        }
+        
+        .section-content {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            padding: 80px 60px;
+            max-width: 1150px;
+            margin: 0 auto;
+            border: 1px solid rgba(198, 166, 103, 0.2);
+            border-radius: 25px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(198, 166, 103, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        h2 {
+            font-family: 'Cormorant', serif;
+            font-size: 52px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #C6A667 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        
+        /* Карточки курсов */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .course-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(198, 166, 103, 0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(198, 166, 103, 0.08), transparent);
+            transition: top 0.6s ease;
+        }
+        
+        .course-card:hover::before {
+            top: 0;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(198, 166, 103, 0.4);
+            box-shadow: 0 12px 40px rgba(198, 166, 103, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .course-icon {
+            font-size: 56px;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+        
+        .course-title {
+            font-size: 26px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FFFFFF 0%, #C6A667 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .course-desc {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .course-duration {
+            font-size: 14px;
+            color: #C6A667;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .course-format {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 30px;
+        }
+        
+        .course-button {
+            display: inline-block;
+            background: transparent;
+            color: #C6A667;
+            padding: 16px 40px;
+            border: 1.5px solid #C6A667;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(198, 166, 103, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .course-button:hover {
+            background: rgba(198, 166, 103, 0.08);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            border-color: #D4B87A;
+            box-shadow: 0 8px 35px rgba(198, 166, 103, 0.35);
+        }
+        
+        /* Футер */
+        footer {
+            position: relative;
+            background: rgba(10, 10, 10, 0.9);
+            padding: 50px;
+            text-align: center;
+            color: #888888;
+            z-index: 1;
+            border-top: 1px solid rgba(198, 166, 103, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Адаптив */
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            h2 { font-size: 36px; }
+            .nav-content { flex-direction: column; gap: 15px; }
+            .nav-links { gap: 15px; }
+            .section-content { padding: 50px 30px; }
+            .courses-grid { grid-template-columns: 1fr; }
+            .page-header { padding: 120px 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo">Жанна Прегнер</a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="index.html#about">О себе</a>
+                <a href="index.html#skills">Компетенции</a>
+                <a href="courses.html">Мои курсы</a>
+                <a href="index.html#contact">Контакты</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Заголовок страницы -->
+    <header class="page-header">
+        <h1>Мои курсы</h1>
+        <p class="page-subtitle">
+            Авторские программы обучения для РОПов и менеджеров продаж.<br>
+            Проверенные стратегии, реальные кейсы, измеримый результат.
+        </p>
+    </header>
+    
+    <!-- Основные курсы -->
+    <section>
+        <div class="section-content">
+            <h2>Программы обучения</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon">📈</div>
+                    <div class="course-title">Система продаж с нуля</div>
+                    <div class="course-desc">
+                        Полный цикл построения отдела продаж: от найма первых сотрудников до выхода на стабильную прибыль. 
+                        Стратегия, процессы, инструменты и метрики.
+                    </div>
+                    <div class="course-duration">⏱ Длительность: 8 недель</div>
+                    <div class="course-format">📍 Формат: онлайн + практика</div>
+                    <a href="#contact" class="course-button">Узнать подробнее</a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-icon">🎯</div>
+                    <div class="course-title">Управление командой продаж</div>
+                    <div class="course-desc">
+                        Как мотивировать, контролировать и выводить на план любой отдел. 
+                        Техники управления, KPI, мотивация и работа с сопротивлением.
+                    </div>
+                    <div class="course-duration">⏱ Длительность: 6 недель</div>
+                    <div class="course-format">📍 Формат: онлайн + кейсы</div>
+                    <a href="#contact" class="course-button">Узнать подробнее</a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-icon">🔥</div>
+                    <div class="course-title">Скрипты продаж</div>
+                    <div class="course-desc">
+                        Разработка скриптов, которые реально работают и конвертируют. 
+                        От холодных звонков до закрытия крупных сделок.
+                    </div>
+                    <div class="course-duration">⏱ Длительность: 4 недели</div>
+                    <div class="course-format">📍 Формат: онлайн + шаблоны</div>
+                    <a href="#contact" class="course-button">Узнать подробнее</a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-icon">⚔️</div>
+                    <div class="course-title">Отработка возражений</div>
+                    <div class="course-desc">
+                        Техники работы с любыми возражениями и закрытие сделок. 
+                        100+ готовых шаблонов ответов на типичные возражения.
+                    </div>
+                    <div class="course-duration">⏱ Длительность: 3 недели</div>
+                    <div class="course-format">📍 Формат: онлайн + тренинги</div>
+                    <a href="#contact" class="course-button">Узнать подробнее</a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-icon">📊</div>
+                    <div class="course-title">CRM и аналитика продаж</div>
+                    <div class="course-desc">
+                        Внедрение CRM-систем и управление по метрикам. 
+                        Как построить прозрачную аналитику и принимать решения на основе данных.
+                    </div>
+                    <div class="course-duration">⏱ Длительность: 5 недель</div>
+                    <div class="course-format">📍 Формат: онлайн + внедрение</div>
+                    <a href="#contact" class="course-button">Узнать подробнее</a>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-icon">💼</div>
+                    <div class="course-title">Индивидуальный коучинг</div>
+                    <div class="course-desc">
+                        Личные консультации для РОПов и собственников бизнеса. 
+                        Работа с вашими реальными задачами и достижение конкретных целей.
+                    </div>
+                    <div class="course-duration">⏱ Длительность: индивидуально</div>
+                    <div class="course-format">📍 Формат: 1-на-1 онлайн</div>
+                    <a href="#contact" class="course-button">Записаться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 Жанна Прегнер. Все права защищены.</p>
+        <p style="margin-top: 10px; opacity: 0.7;">pregner.pro</p>
+    </footer>
+</body>
+</html>

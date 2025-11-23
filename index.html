@@ -16,14 +16,14 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 50%, #FFEB3B 100%);
-            color: #333;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f8f9fa;
+            color: #2c3e50;
             overflow-x: hidden;
             position: relative;
         }
         
-        /* Анимированный фон с пузырями */
+        /* Деликатный декоративный элемент */
         body::before {
             content: '';
             position: fixed;
@@ -31,79 +31,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 235, 59, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 193, 7, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 235, 59, 0.2) 0%, transparent 50%);
-            animation: backgroundPulse 15s ease-in-out infinite;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.02) 0%, transparent 50%);
             z-index: 0;
-        }
-        
-        @keyframes backgroundPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        
-        /* Плавающие лимоны на фоне */
-        .lemon {
-            position: fixed;
-            font-size: 50px;
-            opacity: 0.2;
-            animation: float 25s infinite ease-in-out;
-            z-index: 0;
-            filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.5));
-        }
-        
-        .lemon:nth-child(1) { 
-            top: 10%; left: 10%; 
-            animation: float 20s infinite ease-in-out, rotate 30s infinite linear;
-        }
-        .lemon:nth-child(2) { 
-            top: 60%; left: 80%; 
-            animation: float 25s infinite ease-in-out, rotate 35s infinite linear reverse;
-            animation-delay: 5s;
-        }
-        .lemon:nth-child(3) { 
-            top: 80%; left: 20%; 
-            animation: float 22s infinite ease-in-out, rotate 28s infinite linear;
-            animation-delay: 10s;
-        }
-        .lemon:nth-child(4) { 
-            top: 30%; right: 15%; 
-            animation: float 28s infinite ease-in-out, rotate 32s infinite linear reverse;
-            animation-delay: 15s;
-        }
-        .lemon:nth-child(5) { 
-            top: 50%; left: 50%; 
-            font-size: 60px;
-            animation: float 30s infinite ease-in-out, rotate 40s infinite linear;
-            animation-delay: 8s;
-        }
-        .lemon:nth-child(6) { 
-            top: 15%; right: 30%; 
-            font-size: 45px;
-            animation: float 24s infinite ease-in-out, rotate 36s infinite linear reverse;
-            animation-delay: 3s;
-        }
-        
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) translateX(0) scale(1); 
-            }
-            25% { 
-                transform: translateY(-40px) translateX(20px) scale(1.1); 
-            }
-            50% { 
-                transform: translateY(-20px) translateX(-20px) scale(0.9); 
-            }
-            75% { 
-                transform: translateY(-50px) translateX(10px) scale(1.05); 
-            }
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            pointer-events: none;
         }
         
         /* Хедер */
@@ -120,104 +50,71 @@
         }
         
         .hero-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             padding: 60px 50px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             max-width: 700px;
-            transform: translateY(0);
-            transition: all 0.5s ease;
+            border-left: 4px solid #d4af37;
             animation: heroAppear 1s ease-out;
-            backdrop-filter: blur(10px);
         }
         
         @keyframes heroAppear {
             from {
                 opacity: 0;
-                transform: scale(0.8) translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: translateY(0);
             }
         }
         
         .hero-content:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 80px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
         }
         
         h1 {
-            font-size: 56px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #F9A825 0%, #F57F17 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 48px;
+            font-weight: 400;
+            color: #2c3e50;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: titleGlow 3s ease-in-out infinite;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 5px rgba(249, 168, 37, 0.3)); }
-            50% { filter: drop-shadow(0 0 20px rgba(249, 168, 37, 0.6)); }
+            letter-spacing: 0.5px;
         }
         
         .subtitle {
-            font-size: 24px;
-            color: #F57F17;
+            font-size: 22px;
+            color: #d4af37;
             margin-bottom: 30px;
-            font-weight: 500;
+            font-weight: 400;
+            font-style: italic;
         }
         
         .tagline {
-            font-size: 18px;
-            color: #666;
+            font-size: 17px;
+            color: #5a6c7d;
             line-height: 1.8;
             margin-bottom: 40px;
+            font-family: 'Segoe UI', sans-serif;
         }
         
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #FFEB3B 0%, #FBC02D 100%);
-            color: #333;
-            padding: 18px 45px;
-            border-radius: 50px;
+            background: #d4af37;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 4px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 8px 20px rgba(251, 192, 45, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 0.5px;
         }
         
         .cta-button:hover {
-            transform: translateY(-8px) scale(1.1);
-            box-shadow: 0 15px 40px rgba(251, 192, 45, 0.7);
-        }
-        
-        .cta-button:active {
-            transform: translateY(-3px) scale(1.05);
+            background: #b8941f;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
         
         .scroll-indicator {
@@ -247,38 +144,39 @@
         }
         
         .section-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             padding: 60px 50px;
-            border-radius: 30px;
+            border-radius: 8px;
             max-width: 900px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             opacity: 0;
-            transform: translateY(80px) scale(0.9);
-            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-            backdrop-filter: blur(10px);
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            border-left: 4px solid #d4af37;
         }
         
         .section-content.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        
-        .section-content:hover {
-            box-shadow: 0 30px 80px rgba(255, 193, 7, 0.25);
+            transform: translateY(0);
         }
         
         h2 {
-            font-size: 42px;
-            color: #F9A825;
+            font-size: 36px;
+            color: #2c3e50;
             margin-bottom: 30px;
             text-align: center;
+            font-weight: 400;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 15px;
         }
         
         .about-text {
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1.8;
-            color: #555;
+            color: #5a6c7d;
             margin-bottom: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: justify;
         }
         
         .skills-grid {
@@ -289,76 +187,59 @@
         }
         
         .skill-card {
-            background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
+            background: white;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 8px;
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 3px solid #FFEB3B;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
             position: relative;
-            overflow: hidden;
             opacity: 0;
-            transform: translateY(100px) scale(0.8) rotate(-10deg);
+            transform: translateY(30px);
         }
         
         .skill-card.visible {
             opacity: 1;
-            transform: translateY(0) scale(1) rotate(0deg);
-        }
-        
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 235, 59, 0.3) 0%, transparent 70%);
-            transform: scale(0);
-            transition: transform 0.6s ease;
-        }
-        
-        .skill-card:hover::before {
-            transform: scale(1);
+            transform: translateY(0);
         }
         
         .skill-card:hover {
-            transform: translateY(-15px) rotate(5deg) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 193, 7, 0.4);
-            border-color: #FBC02D;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #d4af37;
         }
         
         .skill-card:nth-child(1).visible { transition-delay: 0.1s; }
-        .skill-card:nth-child(2).visible { transition-delay: 0.2s; }
-        .skill-card:nth-child(3).visible { transition-delay: 0.3s; }
-        .skill-card:nth-child(4).visible { transition-delay: 0.4s; }
-        .skill-card:nth-child(5).visible { transition-delay: 0.5s; }
-        .skill-card:nth-child(6).visible { transition-delay: 0.6s; }
+        .skill-card:nth-child(2).visible { transition-delay: 0.15s; }
+        .skill-card:nth-child(3).visible { transition-delay: 0.2s; }
+        .skill-card:nth-child(4).visible { transition-delay: 0.25s; }
+        .skill-card:nth-child(5).visible { transition-delay: 0.3s; }
+        .skill-card:nth-child(6).visible { transition-delay: 0.35s; }
         
         .skill-icon {
-            font-size: 50px;
+            font-size: 48px;
             margin-bottom: 15px;
             display: inline-block;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
+            transition: all 0.3s ease;
+            opacity: 0.8;
         }
         
         .skill-card:hover .skill-icon {
-            transform: scale(1.3) rotate(360deg);
-            filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.8));
+            transform: scale(1.1);
+            opacity: 1;
         }
         
         .skill-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #F57F17;
+            font-size: 19px;
+            font-weight: 500;
+            color: #2c3e50;
             margin-bottom: 10px;
         }
         
         .skill-desc {
             font-size: 14px;
-            color: #666;
+            color: #5a6c7d;
+            font-family: 'Segoe UI', sans-serif;
         }
         
         /* Контакты */
@@ -374,29 +255,32 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, #FFEB3B 0%, #FBC02D 100%);
-            padding: 15px 30px;
-            border-radius: 50px;
+            background: white;
+            padding: 12px 28px;
+            border-radius: 4px;
             text-decoration: none;
-            color: #333;
-            font-weight: 600;
+            color: #2c3e50;
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(251, 192, 45, 0.3);
+            border: 1px solid #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
         }
         
         .contact-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(251, 192, 45, 0.5);
+            border-color: #d4af37;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
         
         /* Футер */
         footer {
             position: relative;
-            background: rgba(249, 168, 37, 0.2);
+            background: white;
             padding: 30px;
             text-align: center;
-            color: #666;
+            color: #5a6c7d;
             z-index: 1;
+            border-top: 1px solid #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
         }
         
         /* Адаптив */
@@ -410,14 +294,6 @@
     </style>
 </head>
 <body>
-    <!-- Плавающие лимоны -->
-    <div class="lemon">🍋</div>
-    <div class="lemon">🍋</div>
-    <div class="lemon">🍋</div>
-    <div class="lemon">🍋</div>
-    <div class="lemon">🍋</div>
-    <div class="lemon">🍋</div>
-    
     <!-- Главный экран -->
     <header>
         <div class="hero-content">
@@ -546,15 +422,7 @@
             observer.observe(section);
         });
         
-        // Параллакс эффект для лимонов при прокрутке
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const lemons = document.querySelectorAll('.lemon');
-            lemons.forEach((lemon, index) => {
-                const speed = (index + 1) * 0.1;
-                lemon.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
+
         
         // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

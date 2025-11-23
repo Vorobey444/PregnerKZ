@@ -46,6 +46,17 @@
             100% { opacity: 1; }
         }
         
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Навигация */
         nav {
             position: fixed;
@@ -69,16 +80,19 @@
         
         .logo {
             font-family: 'Cormorant', serif;
-            font-size: 22px;
+            font-size: 26px;
             color: #C6A667;
             text-decoration: none;
             font-weight: 500;
+            letter-spacing: 2px;
+            animation: fadeIn 0.8s ease-out;
         }
         
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
+            animation: fadeIn 0.8s ease-out 0.2s both;
         }
         
         .nav-links a {
@@ -100,7 +114,7 @@
             color: #C6A667;
             padding: 12px 30px;
             border: 1.5px solid #C6A667;
-            border-radius: 50px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
@@ -735,7 +749,7 @@
     <!-- Навигация -->
     <nav>
         <div class="nav-content">
-            <a href="#" class="logo">Жанна Прегнер</a>
+            <a href="#" class="logo">Pregner</a>
             <div class="nav-links">
                 <a href="#about">Обо мне</a>
                 <a href="#skills">Экспертиза</a>

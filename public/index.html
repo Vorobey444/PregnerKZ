@@ -1539,6 +1539,15 @@
                         behavior: 'smooth'
                     });
                     
+                    // Принудительно делаем секцию видимой
+                    const targetContent = target.querySelector('.section-content');
+                    if (targetContent) {
+                        targetContent.classList.add('visible');
+                        const cards = targetContent.querySelectorAll('.skill-card');
+                        cards.forEach(card => card.classList.add('visible'));
+                        debugLog(`✨ Forced section visibility for: ${targetId}`, 'success');
+                    }
+                    
                     // Промежуточная проверка
                     setTimeout(() => {
                         const midScroll = window.pageYOffset;

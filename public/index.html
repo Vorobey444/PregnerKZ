@@ -1450,25 +1450,23 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const sectionId = entry.target.querySelector('h2')?.textContent || 'Unknown section';
-                    console.log('✨ Section became visible:', sectionId);
+                    debugLog('✨ Section became visible: ' + sectionId, 'info');
                     entry.target.classList.add('visible');
                     
                     // Анимация карточек внутри секции
                     const cards = entry.target.querySelectorAll('.skill-card');
-                    console.log(`🎴 Animating ${cards.length} cards in section:`, sectionId);
+                    debugLog(`🎴 Animating ${cards.length} cards in section: ${sectionId}`, 'info');
                     cards.forEach((card, index) => {
                         card.classList.add('visible');
-                        console.log(`  ✓ Card ${index + 1} animated`);
                     });
                 }
             });
         }, observerOptions);
         
-        const sections = document.querySelectorAll('.section-content');
-        console.log(`📋 Found ${sections.length} sections to observe`);
-        sections.forEach((section, index) => {
+        const sectionContents = document.querySelectorAll('.section-content');
+        debugLog(`📋 Found ${sectionContents.length} sections to observe`, 'info');
+        sectionContents.forEach((section, index) => {
             observer.observe(section);
-            console.log(`  ✓ Observer attached to section ${index + 1}`);
         });
         
         console.log('✅ Intersection Observer initialized');

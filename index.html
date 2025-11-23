@@ -46,6 +46,189 @@
             100% { opacity: 1; }
         }
         
+        /* Навигация */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 40px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(198, 166, 103, 0.2);
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant', serif;
+            font-size: 22px;
+            color: #C6A667;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover {
+            color: #C6A667;
+        }
+        
+        .courses-button {
+            background: transparent;
+            color: #C6A667;
+            padding: 12px 30px;
+            border: 1.5px solid #C6A667;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .courses-button:hover {
+            background: rgba(198, 166, 103, 0.08);
+            color: #FFFFFF;
+            border-color: #D4B87A;
+            box-shadow: 0 4px 20px rgba(198, 166, 103, 0.25);
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: rgba(15, 15, 15, 0.98);
+            backdrop-filter: blur(30px);
+            margin: 80px auto;
+            padding: 60px 50px;
+            max-width: 1000px;
+            border-radius: 30px;
+            border: 1px solid rgba(198, 166, 103, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 32px;
+            color: #C6A667;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+        
+        .close-modal:hover {
+            color: #FFFFFF;
+            transform: rotate(90deg);
+        }
+        
+        .modal h2 {
+            font-family: 'Cormorant', serif;
+            font-size: 48px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #C6A667 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 300;
+        }
+        
+        .courses-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .modal-course-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(198, 166, 103, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .modal-course-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(198, 166, 103, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        .modal-course-card h3 {
+            font-size: 20px;
+            color: #C6A667;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .modal-course-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .modal-course-card .duration {
+            font-size: 13px;
+            color: #C6A667;
+            font-weight: 500;
+        }
+        
         /* Хедер */
         header {
             position: relative;
@@ -55,7 +238,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 60px 20px;
+            padding: 100px 20px 60px;
             z-index: 1;
         }
         
@@ -547,6 +730,63 @@
     </style>
 </head>
 <body>
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Жанна Прегнер</a>
+            <div class="nav-links">
+                <a href="#about">О себе</a>
+                <a href="#skills">Компетенции</a>
+                <a href="#contact">Контакты</a>
+                <a class="courses-button" onclick="openModal()">Мои курсы</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Модальное окно с курсами -->
+    <div id="coursesModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>🎓 Мои курсы</h2>
+            <p class="about-text" style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
+                Авторские программы обучения для РОПов и менеджеров продаж.<br>
+                Проверенные стратегии, реальные кейсы, измеримый результат.
+            </p>
+            <div class="courses-list">
+                <div class="modal-course-card">
+                    <h3>📈 Система продаж с нуля</h3>
+                    <p>Построение отдела продаж: от найма первых сотрудников до выхода на стабильную прибыль.</p>
+                    <div class="duration">⏱ Длительность: 8 недель</div>
+                </div>
+                <div class="modal-course-card">
+                    <h3>🎯 Управление командой</h3>
+                    <p>Как мотивировать, контролировать и выводить на план любой отдел продаж.</p>
+                    <div class="duration">⏱ Длительность: 6 недель</div>
+                </div>
+                <div class="modal-course-card">
+                    <h3>🔥 Скрипты продаж</h3>
+                    <p>Разработка скриптов, которые реально работают и конвертируют.</p>
+                    <div class="duration">⏱ Длительность: 4 недели</div>
+                </div>
+                <div class="modal-course-card">
+                    <h3>⚔️ Отработка возражений</h3>
+                    <p>Техники работы с любыми возражениями и закрытие сделок.</p>
+                    <div class="duration">⏱ Длительность: 3 недели</div>
+                </div>
+                <div class="modal-course-card">
+                    <h3>📊 CRM и аналитика</h3>
+                    <p>Внедрение CRM-систем и управление по метрикам.</p>
+                    <div class="duration">⏱ Длительность: 5 недель</div>
+                </div>
+                <div class="modal-course-card">
+                    <h3>💼 Индивидуальный коучинг</h3>
+                    <p>Личные консультации для РОПов и собственников бизнеса.</p>
+                    <div class="duration">⏱ Формат: 1-на-1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Главный экран -->
     <header>
         <div class="hero-content">
@@ -709,6 +949,33 @@
         <p style="margin-top: 10px; opacity: 0.7;">pregner.pro</p>
     </footer>
     
+    <script>
+        // Модальное окно курсов
+        function openModal() {
+            document.getElementById('coursesModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('coursesModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Закрытие по клику вне модального окна
+        window.onclick = function(event) {
+            const modal = document.getElementById('coursesModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Закрытие по Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
     <script>
         // Анимация появления секций при прокрутке
         const observerOptions = {

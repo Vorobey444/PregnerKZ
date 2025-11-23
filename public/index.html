@@ -538,8 +538,8 @@
             backdrop-filter: blur(20px);
             padding: 70px 60px;
             max-width: 1150px;
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(198, 166, 103, 0.2);
             border-radius: 25px;
@@ -560,6 +560,11 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
             border-radius: 25px 25px 0 0;
             pointer-events: none;
+        }
+        
+        .section-content.hidden {
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .section-content.visible {
@@ -655,13 +660,18 @@
             border: 2px solid rgba(198, 166, 103, 0.3);
             border-radius: 20px;
             position: relative;
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
             box-shadow: 
                 0 8px 32px rgba(0, 0, 0, 0.4),
                 0 0 25px rgba(198, 166, 103, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
             overflow: hidden;
+        }
+        
+        .skill-card.hidden {
+            opacity: 0;
+            transform: translateY(30px);
         }
         
         .skill-card::before {
@@ -1467,12 +1477,14 @@
                 if (entry.isIntersecting) {
                     const sectionId = entry.target.querySelector('h2')?.textContent || 'Unknown section';
                     debugLog('✨ Section became visible: ' + sectionId, 'info');
+                    entry.target.classList.remove('hidden');
                     entry.target.classList.add('visible');
                     
                     // Анимация карточек внутри секции
                     const cards = entry.target.querySelectorAll('.skill-card');
                     debugLog(`🎴 Animating ${cards.length} cards in section: ${sectionId}`, 'info');
                     cards.forEach((card, index) => {
+                        card.classList.remove('hidden');
                         card.classList.add('visible');
                     });
                 }
@@ -1481,7 +1493,18 @@
         
         const sectionContents = document.querySelectorAll('.section-content');
         debugLog(`📋 Found ${sectionContents.length} sections to observe`, 'info');
+        
+        // Добавляем класс hidden только к секциям, которые не в viewport
         sectionContents.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (!isInViewport) {
+                section.classList.add('hidden');
+                const cards = section.querySelectorAll('.skill-card');
+                cards.forEach(card => card.classList.add('hidden'));
+            }
+            
             observer.observe(section);
         });
         
@@ -1538,15 +1561,6 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-                    
-                    // Принудительно делаем секцию видимой
-                    const targetContent = target.querySelector('.section-content');
-                    if (targetContent) {
-                        targetContent.classList.add('visible');
-                        const cards = targetContent.querySelectorAll('.skill-card');
-                        cards.forEach(card => card.classList.add('visible'));
-                        debugLog(`✨ Forced section visibility for: ${targetId}`, 'success');
-                    }
                     
                     // Промежуточная проверка
                     setTimeout(() => {

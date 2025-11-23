@@ -1530,9 +1530,9 @@
             });
         }, observerOptions);
         
-        const sections = document.querySelectorAll('.section-content');
-        console.log(`📋 Found ${sections.length} sections to observe`);
-        sections.forEach((section, index) => {
+        const sectionContents = document.querySelectorAll('.section-content');
+        console.log(`📋 Found ${sectionContents.length} sections to observe`);
+        sectionContents.forEach((section, index) => {
             observer.observe(section);
             console.log(`  ✓ Observer attached to section ${index + 1}`);
         });

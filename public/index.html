@@ -1702,8 +1702,9 @@
                     const targetRect = target.getBoundingClientRect();
                     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
                     
-                    // Прокручиваем так, чтобы секция была на 30px ниже навигации
-                    const offsetPosition = targetPosition - navHeight - 30;
+                    // Прокручиваем так, чтобы секция была хорошо видна ниже навигации
+                    // Навигация может расширяться (86px -> 123px), поэтому берем запас
+                    const offsetPosition = targetPosition - navHeight - 50;
                     
                     debugLog(`✅ Target found: ${targetId}`, 'success');
                     debugLog(`📏 Nav height: ${navHeight}px`, 'info');
@@ -1718,11 +1719,21 @@
                     });
                     
                     setTimeout(() => {
+                        const nav = document.querySelector('nav');
+                        const currentNavHeight = nav.offsetHeight;
                         const finalScroll = window.pageYOffset;
                         const finalTargetTop = target.getBoundingClientRect().top;
+                        const isVisible = finalTargetTop > currentNavHeight && finalTargetTop < (window.innerHeight - 100);
+                        
                         debugLog(`✔️ Scrolled to: ${finalScroll}px`, 'success');
-                        debugLog(`📍 Section now at: ${finalTargetTop}px from top`, finalTargetTop > 50 ? 'success' : 'error');
-                        debugLog(`🔍 Section visible: ${finalTargetTop > navHeight ? 'YES ✅' : 'NO ❌'}`, finalTargetTop > navHeight ? 'success' : 'error');
+                        debugLog(`📏 Current nav height: ${currentNavHeight}px`, 'info');
+                        debugLog(`📍 Section now at: ${finalTargetTop}px from top`, 'info');
+                        debugLog(`📺 Window height: ${window.innerHeight}px`, 'info');
+                        debugLog(`🔍 Section visible: ${isVisible ? 'YES ✅' : 'NO ❌'}`, isVisible ? 'success' : 'error');
+                        
+                        if (!isVisible) {
+                            debugLog(`⚠️ Section hidden! Need to scroll ${currentNavHeight - finalTargetTop}px more`, 'warn');
+                        }
                     }, 1000);
                 } else {
                     debugLog(`❌ Target not found: ${targetId}`, 'error');

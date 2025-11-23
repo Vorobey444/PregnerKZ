@@ -19,6 +19,7 @@
         
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 100px;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant:wght@300;400;500;600;700&display=swap');
@@ -773,6 +774,10 @@
         
         /* Адаптив */
         @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 140px;
+            }
+            
             /* Навигация */
             nav {
                 padding: 12px 15px;
@@ -1047,6 +1052,10 @@
         
         /* Очень маленькие экраны */
         @media (max-width: 480px) {
+            html {
+                scroll-padding-top: 150px;
+            }
+            
             h1 {
                 font-size: 36px;
                 letter-spacing: 1.5px;

@@ -849,6 +849,11 @@
                 padding: 0 10px;
             }
             
+            /* Header padding для мобильных */
+            header {
+                padding: 220px 20px 60px;
+            }
+            
             /* Hero секция */
             .hero-content { 
                 flex-direction: column; 
@@ -1489,7 +1494,10 @@
                     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
                     
                     // Прокручиваем так, чтобы секция была хорошо видна ниже навигации
-                    const offsetPosition = targetPosition - navHeight - 50;
+                    // Для мобильных увеличиваем отступ из-за высокой навигации
+                    const isMobile = window.innerWidth <= 768;
+                    const extraOffset = isMobile ? 100 : 50;
+                    const offsetPosition = targetPosition - navHeight - extraOffset;
                     
                     debugLog(`✅ Target found: ${targetId}`, 'success');
                     debugLog(`📏 Nav height: ${navHeight}px`, 'info');

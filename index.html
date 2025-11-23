@@ -15,15 +15,17 @@
             scroll-behavior: smooth;
         }
         
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: #f8f9fa;
-            color: #2c3e50;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
             overflow-x: hidden;
             position: relative;
         }
         
-        /* Деликатный декоративный элемент */
+        /* Золотой градиентный фон */
         body::before {
             content: '';
             position: fixed;
@@ -31,7 +33,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255, 193, 7, 0.02) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
             z-index: 0;
             pointer-events: none;
         }
@@ -47,16 +51,18 @@
             text-align: center;
             padding: 20px;
             z-index: 1;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 1) 100%);
         }
         
         .hero-content {
-            background: white;
+            background: rgba(20, 20, 20, 0.8);
             padding: 60px 50px;
-            border-radius: 8px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.2), inset 0 0 0 1px rgba(212, 175, 55, 0.3);
             max-width: 700px;
-            border-left: 4px solid #d4af37;
+            border: 2px solid rgba(212, 175, 55, 0.3);
             animation: heroAppear 1s ease-out;
+            backdrop-filter: blur(10px);
         }
         
         @keyframes heroAppear {
@@ -71,50 +77,54 @@
         }
         
         .hero-content:hover {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 50px rgba(212, 175, 55, 0.4), inset 0 0 0 1px rgba(212, 175, 55, 0.5);
+            border-color: rgba(212, 175, 55, 0.6);
         }
         
         h1 {
-            font-size: 48px;
-            font-weight: 400;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
+            font-size: 56px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4af37 0%, #f8e45f 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
         
         .subtitle {
-            font-size: 22px;
+            font-size: 24px;
             color: #d4af37;
             margin-bottom: 30px;
-            font-weight: 400;
-            font-style: italic;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
         
         .tagline {
-            font-size: 17px;
-            color: #5a6c7d;
+            font-size: 18px;
+            color: #b8b8b8;
             line-height: 1.8;
             margin-bottom: 40px;
-            font-family: 'Segoe UI', sans-serif;
         }
         
         .cta-button {
             display: inline-block;
-            background: #d4af37;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #d4af37 0%, #f8e45f 100%);
+            color: #0a0a0a;
+            padding: 16px 45px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 16px;
             transition: all 0.3s ease;
-            font-family: 'Segoe UI', sans-serif;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
         }
         
         .cta-button:hover {
-            background: #b8941f;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
         }
         
         .scroll-indicator {
@@ -144,15 +154,16 @@
         }
         
         .section-content {
-            background: white;
+            background: rgba(20, 20, 20, 0.8);
             padding: 60px 50px;
-            border-radius: 8px;
+            border-radius: 16px;
             max-width: 900px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.15), inset 0 0 0 1px rgba(212, 175, 55, 0.2);
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
-            border-left: 4px solid #d4af37;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .section-content.visible {
@@ -161,22 +172,22 @@
         }
         
         h2 {
-            font-size: 36px;
-            color: #2c3e50;
-            margin-bottom: 30px;
+            font-size: 42px;
+            background: linear-gradient(135deg, #d4af37 0%, #f8e45f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
             text-align: center;
-            font-weight: 400;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
         
         .about-text {
             font-size: 17px;
             line-height: 1.8;
-            color: #5a6c7d;
+            color: #b8b8b8;
             margin-bottom: 20px;
-            font-family: 'Segoe UI', sans-serif;
-            text-align: justify;
         }
         
         .skills-grid {
@@ -187,15 +198,16 @@
         }
         
         .skill-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
+            background: rgba(30, 30, 30, 0.6);
+            padding: 35px;
+            border-radius: 12px;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
             position: relative;
             opacity: 0;
             transform: translateY(30px);
+            backdrop-filter: blur(5px);
         }
         
         .skill-card.visible {
@@ -204,9 +216,10 @@
         }
         
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            border-color: #d4af37;
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.6);
+            background: rgba(30, 30, 30, 0.8);
         }
         
         .skill-card:nth-child(1).visible { transition-delay: 0.1s; }
@@ -230,16 +243,16 @@
         }
         
         .skill-title {
-            font-size: 19px;
-            font-weight: 500;
-            color: #2c3e50;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
             margin-bottom: 10px;
         }
         
         .skill-desc {
             font-size: 14px;
-            color: #5a6c7d;
-            font-family: 'Segoe UI', sans-serif;
+            color: #b8b8b8;
+            line-height: 1.6;
         }
         
         /* Контакты */
@@ -255,32 +268,32 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: white;
-            padding: 12px 28px;
-            border-radius: 4px;
+            background: rgba(30, 30, 30, 0.6);
+            padding: 14px 32px;
+            border-radius: 8px;
             text-decoration: none;
-            color: #2c3e50;
+            color: #ffffff;
             font-weight: 500;
             transition: all 0.3s ease;
-            border: 1px solid #e0e0e0;
-            font-family: 'Segoe UI', sans-serif;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(5px);
         }
         
         .contact-link:hover {
-            border-color: #d4af37;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.3);
+            background: rgba(30, 30, 30, 0.8);
         }
         
         /* Футер */
         footer {
             position: relative;
-            background: white;
-            padding: 30px;
+            background: rgba(10, 10, 10, 0.9);
+            padding: 40px;
             text-align: center;
-            color: #5a6c7d;
+            color: #808080;
             z-index: 1;
-            border-top: 1px solid #e0e0e0;
-            font-family: 'Segoe UI', sans-serif;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
         
         /* Адаптив */

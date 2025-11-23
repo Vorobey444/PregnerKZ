@@ -1699,13 +1699,17 @@
                 if (target) {
                     const nav = document.querySelector('nav');
                     const navHeight = nav.offsetHeight;
+                    const targetRect = target.getBoundingClientRect();
                     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = targetPosition - navHeight - 20;
+                    
+                    // Исправлено: добавляем отступ ПОСЛЕ навигации, а не вычитаем из позиции
+                    const offsetPosition = targetPosition - navHeight + 10; // 10px видимого отступа
                     
                     debugLog(`✅ Target found: ${targetId}`, 'success');
                     debugLog(`📏 Nav height: ${navHeight}px`, 'info');
-                    debugLog(`📍 Target position: ${targetPosition}px`, 'info');
-                    debugLog(`🎯 Scroll to: ${offsetPosition}px`, 'info');
+                    debugLog(`📍 Target absolute position: ${targetPosition}px`, 'info');
+                    debugLog(`📍 Target visible top: ${targetRect.top}px`, 'info');
+                    debugLog(`🎯 Will scroll to: ${offsetPosition}px`, 'info');
                     debugLog(`📊 Current scroll: ${window.pageYOffset}px`, 'info');
                     
                     window.scrollTo({
@@ -1714,7 +1718,11 @@
                     });
                     
                     setTimeout(() => {
-                        debugLog(`✔️ Scrolled to: ${window.pageYOffset}px`, 'success');
+                        const finalScroll = window.pageYOffset;
+                        const finalTargetTop = target.getBoundingClientRect().top;
+                        debugLog(`✔️ Scrolled to: ${finalScroll}px`, 'success');
+                        debugLog(`📍 Section now at: ${finalTargetTop}px from top`, finalTargetTop > 50 ? 'success' : 'error');
+                        debugLog(`🔍 Section visible: ${finalTargetTop > navHeight ? 'YES ✅' : 'NO ❌'}`, finalTargetTop > navHeight ? 'success' : 'error');
                     }, 1000);
                 } else {
                     debugLog(`❌ Target not found: ${targetId}`, 'error');

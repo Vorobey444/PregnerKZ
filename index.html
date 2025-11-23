@@ -63,7 +63,7 @@
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(30px);
             padding: 80px 100px;
-            max-width: 1100px;
+            max-width: 1200px;
             animation: heroAppear 1.5s ease-out;
             position: relative;
             border: 1px solid rgba(242, 140, 40, 0.3);
@@ -73,6 +73,42 @@
                 0 0 100px rgba(242, 140, 40, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 400px;
+        }
+        
+        .hero-photo {
+            flex: 0 0 280px;
+            position: relative;
+            animation: heroAppear 1.5s ease-out 0.3s both;
+        }
+        
+        .hero-photo img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 25px;
+            border: 3px solid rgba(242, 140, 40, 0.4);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.6),
+                0 0 80px rgba(242, 140, 40, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero-photo img:hover {
+            transform: scale(1.05) translateY(-5px);
+            border-color: rgba(242, 140, 40, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.7),
+                0 0 120px rgba(242, 140, 40, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
         .hero-content::before {
@@ -482,7 +518,18 @@
             h1 { font-size: 36px; }
             .subtitle { font-size: 18px; }
             h2 { font-size: 32px; }
-            .hero-content, .section-content { padding: 40px 30px; }
+            .hero-content { 
+                flex-direction: column; 
+                padding: 40px 30px; 
+            }
+            .hero-text { min-width: auto; }
+            .hero-photo { 
+                flex: 0 0 auto; 
+                width: 100%; 
+                max-width: 250px; 
+            }
+            .hero-photo img { height: 300px; }
+            .section-content { padding: 40px 30px; }
             .skills-grid { grid-template-columns: 1fr; }
             .about-content { flex-direction: column; }
             .about-photo { flex: 0 0 auto; width: 100%; max-width: 300px; }
@@ -493,13 +540,18 @@
     <!-- Главный экран -->
     <header>
         <div class="hero-content">
-            <h1>Жанна Прегнер</h1>
-            <div class="subtitle">Профессиональный РОП</div>
-            <p class="tagline">
-                Превращаю амбициозные идеи в успешные проекты.<br>
-                Эффективное управление, креативный подход, гарантированный результат.
-            </p>
-            <a href="#about" class="cta-button">Узнать больше</a>
+            <div class="hero-text">
+                <h1>Жанна Прегнер</h1>
+                <div class="subtitle">Профессиональный РОП</div>
+                <p class="tagline">
+                    Превращаю амбициозные идеи в успешные проекты.<br>
+                    Эффективное управление, креативный подход, гарантированный результат.
+                </p>
+                <a href="#about" class="cta-button">Узнать больше</a>
+            </div>
+            <div class="hero-photo">
+                <img src="images/photo.jpg" alt="Жанна Прегнер">
+            </div>
         </div>
         <div class="scroll-indicator">↓</div>
     </header>

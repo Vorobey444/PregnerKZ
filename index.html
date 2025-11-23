@@ -19,13 +19,13 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0a;
+            background: #0a0a0a url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxmaWx0ZXIgaWQ9Im5vaXNlIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+');
             color: #ffffff;
             overflow-x: hidden;
             position: relative;
         }
         
-        /* Мраморный фон с золотыми прожилками */
+        /* Чистый мраморный фон с золотыми акцентами */
         body::before {
             content: '';
             position: fixed;
@@ -33,30 +33,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(125deg, transparent 0%, transparent 48%, rgba(212, 175, 55, 0.4) 49%, rgba(255, 215, 0, 0.6) 50%, rgba(212, 175, 55, 0.4) 51%, transparent 52%, transparent 100%),
-                linear-gradient(135deg, transparent 0%, transparent 48%, rgba(212, 175, 55, 0.3) 49%, rgba(184, 134, 11, 0.5) 50%, rgba(212, 175, 55, 0.3) 51%, transparent 52%, transparent 100%),
-                linear-gradient(-45deg, transparent 0%, transparent 68%, rgba(255, 215, 0, 0.2) 69%, rgba(212, 175, 55, 0.3) 70%, transparent 71%, transparent 100%),
-                linear-gradient(65deg, transparent 20%, rgba(212, 175, 55, 0.15) 40%, transparent 60%),
-                radial-gradient(ellipse at 30% 40%, rgba(240, 240, 240, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 60%, rgba(200, 200, 200, 0.06) 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0a 0%, #1a1410 30%, #0a0a0a 60%, #151515 100%);
-            background-size: 800px 800px, 600px 600px, 1000px 1000px, 700px 700px, 400px 400px, 500px 500px, 100% 100%;
-            background-position: 0% 0%, 30% 30%, 60% 60%, 90% 10%, 20% 80%, 80% 20%, 0% 0%;
-            animation: marbleFlow 20s ease-in-out infinite alternate;
+            background: 
+                radial-gradient(ellipse at 25% 35%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
+                radial-gradient(ellipse at 75% 65%, rgba(255, 215, 0, 0.04) 0%, transparent 40%),
+                linear-gradient(125deg, transparent 40%, rgba(212, 175, 55, 0.03) 50%, transparent 60%);
+            animation: subtleGlow 15s ease-in-out infinite alternate;
             z-index: 0;
             pointer-events: none;
         }
         
-        @keyframes marbleFlow {
-            0% { 
-                opacity: 0.9;
-                background-position: 0% 0%, 30% 30%, 60% 60%, 90% 10%, 20% 80%, 80% 20%, 0% 0%;
-            }
-            100% { 
-                opacity: 1;
-                background-position: 5% 5%, 35% 35%, 65% 65%, 85% 15%, 25% 85%, 75% 15%, 0% 0%;
-            }
+        @keyframes subtleGlow {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
         }
         
         /* Хедер */

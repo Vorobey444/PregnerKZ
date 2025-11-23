@@ -1702,8 +1702,8 @@
                     const targetRect = target.getBoundingClientRect();
                     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
                     
-                    // Исправлено: добавляем отступ ПОСЛЕ навигации, а не вычитаем из позиции
-                    const offsetPosition = targetPosition - navHeight + 10; // 10px видимого отступа
+                    // Прокручиваем так, чтобы секция была на 30px ниже навигации
+                    const offsetPosition = targetPosition - navHeight - 30;
                     
                     debugLog(`✅ Target found: ${targetId}`, 'success');
                     debugLog(`📏 Nav height: ${navHeight}px`, 'info');

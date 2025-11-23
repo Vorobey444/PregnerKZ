@@ -282,13 +282,188 @@
         
         /* Адаптив */
         @media (max-width: 768px) {
-            h1 { font-size: 48px; }
-            h2 { font-size: 36px; }
-            .nav-content { flex-direction: column; gap: 15px; }
-            .nav-links { gap: 15px; }
-            .section-content { padding: 50px 30px; }
-            .courses-grid { grid-template-columns: 1fr; }
-            .page-header { padding: 120px 20px 60px; }
+            nav {
+                padding: 12px 15px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .nav-content { 
+                flex-direction: column; 
+                gap: 12px;
+                align-items: center;
+            }
+            
+            .nav-links { 
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+            
+            .nav-links a {
+                font-size: 14px;
+            }
+            
+            h1 { 
+                font-size: 42px;
+                letter-spacing: 2px;
+            }
+            
+            h2 { 
+                font-size: 34px;
+                letter-spacing: 2px;
+                margin-bottom: 35px;
+            }
+            
+            .page-subtitle {
+                font-size: 15px;
+                padding: 0 10px;
+            }
+            
+            .section-content { 
+                padding: 40px 20px;
+                border-radius: 20px;
+            }
+            
+            .courses-grid { 
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .course-card {
+                padding: 40px 25px;
+            }
+            
+            .course-icon {
+                font-size: 48px;
+            }
+            
+            .course-title {
+                font-size: 22px;
+            }
+            
+            .course-desc {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            
+            .course-button {
+                padding: 14px 32px;
+                font-size: 13px;
+            }
+            
+            .page-header { 
+                padding: 100px 15px 50px;
+                min-height: auto;
+            }
+            
+            footer {
+                padding: 30px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Планшеты */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-content {
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 64px;
+            }
+            
+            h2 {
+                font-size: 44px;
+            }
+            
+            .section-content {
+                padding: 60px 40px;
+            }
+            
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Очень маленькие экраны */
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 12px;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .nav-links a {
+                font-size: 13px;
+            }
+            
+            h1 {
+                font-size: 36px;
+                letter-spacing: 1.5px;
+            }
+            
+            h2 {
+                font-size: 28px;
+                letter-spacing: 1.5px;
+                margin-bottom: 30px;
+            }
+            
+            .page-subtitle {
+                font-size: 14px;
+            }
+            
+            .page-header {
+                padding: 90px 12px 40px;
+            }
+            
+            .section-content {
+                padding: 30px 15px;
+            }
+            
+            .courses-grid {
+                gap: 20px;
+            }
+            
+            .course-card {
+                padding: 30px 20px;
+            }
+            
+            .course-icon {
+                font-size: 42px;
+                margin-bottom: 20px;
+            }
+            
+            .course-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .course-desc {
+                font-size: 14px;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+            
+            .course-duration,
+            .course-format {
+                font-size: 13px;
+            }
+            
+            .course-button {
+                padding: 12px 28px;
+                font-size: 12px;
+                width: 100%;
+            }
+            
+            footer {
+                padding: 25px 15px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>

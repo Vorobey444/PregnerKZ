@@ -1481,18 +1481,22 @@
         const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
         console.log(`🔗 Found ${smoothScrollLinks.length} internal navigation links`);
         
-        smoothScrollLinks.forEach((anchor, index) => {
+                smoothScrollLinks.forEach((anchor, index) => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const target = document.querySelector(targetId);
                 
-                debugLog(`🎯 Click on: ${targetId}`, 'info');
+                debugLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
+                debugLog(`🎯 CLICK EVENT: ${targetId}`, 'info');
+                debugLog(`⏰ Time: ${new Date().toLocaleTimeString()}`, 'info');
                 
                 if (target) {
                     const nav = document.querySelector('nav');
                     const navHeight = nav.offsetHeight;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const navRect = nav.getBoundingClientRect();
+                    const targetRect = target.getBoundingClientRect();
+                    const targetPosition = targetRect.top + window.pageYOffset;
                     
                     // Прокручиваем так, чтобы секция была хорошо видна ниже навигации
                     // Для мобильных увеличиваем отступ из-за высокой навигации
@@ -1501,41 +1505,84 @@
                     const offsetPosition = targetPosition - navHeight - extraOffset;
                     
                     debugLog(`✅ Target found: ${targetId}`, 'success');
+                    debugLog(`━━━ NAVIGATION INFO ━━━`, 'info');
                     debugLog(`📏 Nav height: ${navHeight}px`, 'info');
-                    debugLog(`📍 Target absolute position: ${targetPosition}px`, 'info');
-                    debugLog(`📍 Target visible top: ${target.getBoundingClientRect().top}px`, 'info');
-                    debugLog(`🎯 Will scroll to: ${offsetPosition}px`, 'info');
-                    debugLog(`📊 Current scroll: ${window.pageYOffset}px`, 'info');
+                    debugLog(`📐 Nav top: ${navRect.top}px`, 'info');
+                    debugLog(`📐 Nav bottom: ${navRect.bottom}px`, 'info');
+                    debugLog(`📱 Is mobile: ${isMobile ? 'YES' : 'NO'}`, 'info');
+                    debugLog(`➕ Extra offset: ${extraOffset}px`, 'info');
+                    
+                    debugLog(`━━━ TARGET BEFORE SCROLL ━━━`, 'info');
+                    debugLog(`📍 Target rect.top: ${targetRect.top}px`, 'info');
+                    debugLog(`📍 Target rect.bottom: ${targetRect.bottom}px`, 'info');
+                    debugLog(`📍 Target absolute Y: ${targetPosition}px`, 'info');
+                    debugLog(`📊 Current scroll Y: ${window.pageYOffset}px`, 'info');
+                    debugLog(`📺 Viewport: ${window.innerWidth}x${window.innerHeight}px`, 'info');
+                    
+                    debugLog(`━━━ SCROLL CALCULATION ━━━`, 'warn');
+                    debugLog(`🔢 Formula: ${targetPosition} - ${navHeight} - ${extraOffset}`, 'warn');
+                    debugLog(`🎯 Will scroll to: ${offsetPosition}px`, 'warn');
+                    debugLog(`📏 Scroll distance: ${Math.abs(offsetPosition - window.pageYOffset)}px`, 'warn');
                     
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
                     
+                    // Промежуточная проверка
+                    setTimeout(() => {
+                        const midScroll = window.pageYOffset;
+                        const midTargetTop = target.getBoundingClientRect().top;
+                        debugLog(`━━━ AFTER 500ms ━━━`, 'info');
+                        debugLog(`📊 Scroll position: ${midScroll}px`, 'info');
+                        debugLog(`📍 Target position: ${midTargetTop}px from top`, 'info');
+                    }, 500);
+                    
                     setTimeout(() => {
                         const nav = document.querySelector('nav');
                         const currentNavHeight = nav.offsetHeight;
+                        const currentNavRect = nav.getBoundingClientRect();
                         const finalScroll = window.pageYOffset;
-                        const finalTargetTop = target.getBoundingClientRect().top;
+                        const finalTargetRect = target.getBoundingClientRect();
+                        const finalTargetTop = finalTargetRect.top;
+                        const finalTargetBottom = finalTargetRect.bottom;
                         const isVisible = finalTargetTop > currentNavHeight && finalTargetTop < (window.innerHeight - 100);
                         
-                        debugLog(`✔️ Scrolled to: ${finalScroll}px`, 'success');
-                        debugLog(`📏 Current nav height: ${currentNavHeight}px`, 'info');
-                        debugLog(`📍 Section now at: ${finalTargetTop}px from top`, 'info');
-                        debugLog(`📺 Window height: ${window.innerHeight}px`, 'info');
-                        debugLog(`🔍 Section visible: ${isVisible ? 'YES ✅' : 'NO ❌'}`, isVisible ? 'success' : 'error');
+                        debugLog(`━━━ FINAL POSITION (1000ms) ━━━`, 'success');
+                        debugLog(`✔️ Final scroll Y: ${finalScroll}px`, 'success');
+                        debugLog(`📏 Nav height: ${currentNavHeight}px (top: ${currentNavRect.top}, bottom: ${currentNavRect.bottom})`, 'info');
+                        debugLog(`📍 Target top: ${finalTargetTop}px`, 'info');
+                        debugLog(`📍 Target bottom: ${finalTargetBottom}px`, 'info');
+                        debugLog(`📍 Target height: ${finalTargetRect.height}px`, 'info');
+                        debugLog(`📺 Viewport height: ${window.innerHeight}px`, 'info');
+                        
+                        debugLog(`━━━ VISIBILITY CHECK ━━━`, isVisible ? 'success' : 'error');
+                        debugLog(`🔍 Is below nav? ${finalTargetTop > currentNavHeight ? 'YES ✅' : 'NO ❌ (gap: ' + (currentNavHeight - finalTargetTop) + 'px)'}`, finalTargetTop > currentNavHeight ? 'success' : 'error');
+                        debugLog(`🔍 Is above fold? ${finalTargetTop < (window.innerHeight - 100) ? 'YES ✅' : 'NO ❌'}`, finalTargetTop < (window.innerHeight - 100) ? 'success' : 'error');
+                        debugLog(`🔍 Section visible: ${isVisible ? 'YES ✅✅✅' : 'NO ❌❌❌'}`, isVisible ? 'success' : 'error');
                         
                         if (!isVisible) {
-                            debugLog(`⚠️ Section hidden! Need to scroll ${currentNavHeight - finalTargetTop}px more`, 'warn');
+                            const hiddenAmount = Math.max(0, currentNavHeight - finalTargetTop);
+                            const belowFold = Math.max(0, finalTargetTop - (window.innerHeight - 100));
+                            debugLog(`━━━ PROBLEM DETECTED ━━━`, 'error');
+                            if (hiddenAmount > 0) {
+                                debugLog(`❌ Hidden by nav: ${hiddenAmount}px`, 'error');
+                                debugLog(`💡 Need to scroll ${hiddenAmount}px more DOWN`, 'warn');
+                            }
+                            if (belowFold > 0) {
+                                debugLog(`❌ Below viewport: ${belowFold}px`, 'error');
+                                debugLog(`💡 Need to scroll ${belowFold}px more UP`, 'warn');
+                            }
                         }
+                        
+                        debugLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
                     }, 1000);
                 } else {
                     debugLog(`❌ Target not found: ${targetId}`, 'error');
+                    debugLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
                 }
             });
-        });
-        
-        debugLog('✅ Smooth scroll initialized', 'success');
+        });        debugLog('✅ Smooth scroll initialized', 'success');
         
         // Проверка загрузки изображений
         window.addEventListener('load', function() {

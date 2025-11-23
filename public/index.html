@@ -1609,7 +1609,16 @@
                 console.log(`🎯 Navigation clicked: ${targetId}`);
                 if (target) {
                     console.log('✅ Target found, scrolling...');
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Вычисляем правильную позицию с учетом навигации
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = targetPosition - navHeight - 20; // 20px дополнительный отступ
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
                 } else {
                     console.warn('⚠️ Target not found:', targetId);
                 }

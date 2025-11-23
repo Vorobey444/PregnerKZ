@@ -555,11 +555,6 @@
             z-index: 1;
         }
         
-        section[id] {
-            padding-top: 120px;
-            margin-top: -100px;
-        }
-        
         .section-content {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
@@ -814,9 +809,8 @@
         
         /* Адаптив */
         @media (max-width: 768px) {
-            section[id] {
-                padding-top: 100px;
-                margin-top: -80px;
+            html {
+                scroll-padding-top: 90px;
             }
             
             /* Навигация */
@@ -1097,9 +1091,8 @@
         
         /* Очень маленькие экраны */
         @media (max-width: 480px) {
-            section[id] {
-                padding-top: 100px;
-                margin-top: -80px;
+            html {
+                scroll-padding-top: 95px;
             }
             
             h1 {

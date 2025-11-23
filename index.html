@@ -19,19 +19,13 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: 
-                radial-gradient(ellipse 800px 600px at 15% 25%, rgba(255, 255, 255, 0.95) 0%, rgba(240, 240, 240, 0.7) 20%, rgba(180, 180, 180, 0.3) 40%, transparent 60%),
-                radial-gradient(ellipse 600px 800px at 85% 75%, rgba(50, 50, 50, 0.9) 0%, rgba(30, 30, 30, 0.6) 30%, transparent 50%),
-                radial-gradient(ellipse 500px 500px at 60% 40%, rgba(200, 200, 200, 0.4) 0%, transparent 40%),
-                radial-gradient(ellipse 400px 700px at 30% 70%, rgba(150, 150, 150, 0.5) 0%, transparent 45%),
-                radial-gradient(ellipse 700px 400px at 70% 20%, rgba(220, 220, 220, 0.6) 0%, rgba(180, 180, 180, 0.3) 30%, transparent 50%),
-                #1a1a1a;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0d1117 50%, #0a0a0a 100%);
             color: #ffffff;
             overflow-x: hidden;
             position: relative;
         }
         
-        /* Золотые трещины на мраморе */
+        /* Тонкие платиновые блики */
         body::before {
             content: '';
             position: fixed;
@@ -39,19 +33,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(120deg, transparent 0%, transparent 49.5%, rgba(212, 175, 55, 0.6) 49.8%, rgba(255, 215, 0, 0.8) 50%, rgba(212, 175, 55, 0.6) 50.2%, transparent 50.5%, transparent 100%),
-                linear-gradient(45deg, transparent 0%, transparent 39%, rgba(184, 134, 11, 0.4) 39.5%, rgba(212, 175, 55, 0.5) 40%, rgba(184, 134, 11, 0.4) 40.5%, transparent 41%, transparent 100%),
-                linear-gradient(-60deg, transparent 0%, transparent 64%, rgba(255, 215, 0, 0.3) 64.5%, rgba(212, 175, 55, 0.4) 65%, transparent 65.5%, transparent 100%);
-            background-size: 1400px 1400px, 900px 900px, 1100px 1100px;
-            background-position: 20% 30%, 70% 60%, 40% 80%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(192, 192, 192, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(229, 228, 226, 0.04) 0%, transparent 40%);
+            animation: platinumPulse 10s ease-in-out infinite alternate;
             z-index: 0;
             pointer-events: none;
         }
         
-        @keyframes marbleShift {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 0.9; }
+        @keyframes platinumPulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
         }
         
         /* Хедер */

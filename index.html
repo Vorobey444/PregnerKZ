@@ -20,10 +20,10 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: 
-                repeating-linear-gradient(90deg, rgba(245, 245, 245, 0.03) 0px, transparent 1px, transparent 2px, rgba(245, 245, 245, 0.03) 3px),
-                repeating-linear-gradient(0deg, rgba(245, 245, 245, 0.03) 0px, transparent 1px, transparent 2px, rgba(245, 245, 245, 0.03) 3px),
-                linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f5f5f5 100%);
-            color: #1a1a1a;
+                repeating-linear-gradient(90deg, rgba(200, 200, 200, 0.02) 0px, transparent 1px, transparent 2px, rgba(200, 200, 200, 0.02) 3px),
+                repeating-linear-gradient(0deg, rgba(200, 200, 200, 0.02) 0px, transparent 1px, transparent 2px, rgba(200, 200, 200, 0.02) 3px),
+                linear-gradient(135deg, #e8e8e8 0%, #f0f0f0 50%, #e5e5e5 100%);
+            color: #2a2a2a;
             overflow-x: hidden;
             position: relative;
         }
@@ -37,9 +37,9 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(125deg, transparent 48%, rgba(212, 175, 55, 0.08) 49%, rgba(212, 175, 55, 0.15) 50%, rgba(212, 175, 55, 0.08) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 45%, rgba(255, 215, 0, 0.05) 48%, transparent 52%),
-                radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+                linear-gradient(125deg, transparent 48%, rgba(180, 150, 50, 0.04) 49%, rgba(180, 150, 50, 0.08) 50%, rgba(180, 150, 50, 0.04) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 45%, rgba(200, 170, 60, 0.03) 48%, transparent 52%),
+                radial-gradient(circle at 30% 40%, rgba(180, 150, 50, 0.02) 0%, transparent 50%);
             z-index: 0;
             pointer-events: none;
         }
@@ -72,8 +72,8 @@
             left: 50%;
             transform: translateX(-50%);
             width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(160, 137, 107, 0.4), transparent);
         }
         
         @keyframes heroAppear {
@@ -107,12 +107,12 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(160, 137, 107, 0.25), transparent);
         }
         
         .subtitle {
             font-size: 18px;
-            color: #b8860b;
+            color: #8b7355;
             margin-bottom: 40px;
             font-weight: 400;
             letter-spacing: 4px;
@@ -133,9 +133,9 @@
         .cta-button {
             display: inline-block;
             background: transparent;
-            color: #1a1a1a;
+            color: #2a2a2a;
             padding: 14px 40px;
-            border: 2px solid #d4af37;
+            border: 2px solid #a0896b;
             border-radius: 0;
             text-decoration: none;
             font-weight: 500;
@@ -146,7 +146,7 @@
         }
         
         .cta-button:hover {
-            background: #d4af37;
+            background: #a0896b;
             color: #ffffff;
         }
         
@@ -177,14 +177,14 @@
         }
         
         .section-content {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(245, 245, 245, 0.6);
             padding: 80px 60px;
             max-width: 1000px;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid rgba(180, 150, 50, 0.15);
+            border-bottom: 1px solid rgba(180, 150, 50, 0.15);
             backdrop-filter: blur(10px);
         }
         
@@ -213,7 +213,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 1px;
-            background: #d4af37;
+            background: #a0896b;
         }
         
         .about-text {
@@ -232,11 +232,11 @@
         }
         
         .skill-card {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(240, 240, 240, 0.5);
             padding: 40px 30px;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(180, 150, 50, 0.12);
             position: relative;
             opacity: 0;
             transform: translateY(30px);
@@ -250,8 +250,8 @@
         
         .skill-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.4);
-            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(180, 150, 50, 0.3);
+            background: rgba(245, 245, 245, 0.7);
         }
         
         .skill-card:nth-child(1).visible { transition-delay: 0.1s; }
@@ -305,26 +305,26 @@
             background: transparent;
             padding: 12px 30px;
             text-decoration: none;
-            color: #1a1a1a;
+            color: #2a2a2a;
             font-weight: 500;
             transition: all 0.3s ease;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(160, 137, 107, 0.25);
         }
         
         .contact-link:hover {
-            border-color: #d4af37;
-            background: rgba(212, 175, 55, 0.05);
+            border-color: #a0896b;
+            background: rgba(160, 137, 107, 0.05);
         }
         
         /* Футер */
         footer {
             position: relative;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(240, 240, 240, 0.5);
             padding: 50px;
             text-align: center;
-            color: #666666;
+            color: #777777;
             z-index: 1;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid rgba(160, 137, 107, 0.15);
             backdrop-filter: blur(10px);
         }
         

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -19,6 +19,7 @@
         
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 90px;
         }
         
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant:wght@300;400;500;600;700&display=swap');
@@ -69,11 +70,18 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(25px);
             padding: 20px 40px;
             z-index: 100;
             border-bottom: 1px solid rgba(198, 166, 103, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 15px 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
         
         .nav-content {
@@ -147,13 +155,19 @@
             transition: width 0.3s ease;
         }
         
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: #F3E7C2;
             text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
         }
         
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
+        }
+        
+        .nav-links a.active {
+            font-weight: 500;
         }
         
         .courses-button {
@@ -982,6 +996,28 @@
     </style>
 </head>
 <body>
+    <!-- Кнопка для открытия Debug отчета -->
+    <button id="debugBtn" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: #D4AF37; color: #000; border: none; padding: 12px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(212,175,55,0.4);">
+        🐛 DEBUG
+    </button>
+    
+    <!-- Модальное окно Debug Reports -->
+    <div id="debugModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; overflow-y: auto;">
+        <div style="max-width: 900px; margin: 20px auto; background: #1a1a1a; border-radius: 15px; padding: 25px; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #D4AF37; padding-bottom: 15px;">
+                <h2 style="margin: 0; color: #D4AF37; font-size: 24px;">🐛 Debug Reports</h2>
+                <button id="closeDebug" style="background: #ff4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 18px;">✕</button>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <button id="clearLogs" style="background: #D4AF37; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-right: 10px;">Clear Logs</button>
+                <button id="copyLogs" style="background: #666; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">Copy All</button>
+            </div>
+            <div id="debugContent" style="background: #0a0a0a; padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 12px; max-height: 70vh; overflow-y: auto; line-height: 1.6;">
+                <div style="color: #888;">Логи появятся здесь...</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Навигация -->
     <nav>
         <div class="nav-content">
@@ -1292,30 +1328,95 @@
     </footer>
     
     <script>
-        // Детальное логирование для отладки
-        console.log('🚀 Pregner.pro - Initialization started');
-        console.log('📱 Device Info:', {
-            userAgent: navigator.userAgent,
-            platform: navigator.platform,
-            screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight,
-            isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-            isTouch: 'ontouchstart' in window
+        // Debug система
+        const debugContent = document.getElementById('debugContent');
+        const debugModal = document.getElementById('debugModal');
+        const debugBtn = document.getElementById('debugBtn');
+        const closeDebug = document.getElementById('closeDebug');
+        const clearLogs = document.getElementById('clearLogs');
+        const copyLogs = document.getElementById('copyLogs');
+        let debugLogs = [];
+        
+        function debugLog(message, type = 'info') {
+            const time = new Date().toLocaleTimeString('ru-RU', { hour12: false });
+            const logEntry = `[${time}] ${message}`;
+            debugLogs.push(logEntry);
+            console.log(message);
+            
+            const colors = {
+                info: '#00ff88',
+                warn: '#ffaa00',
+                error: '#ff4444',
+                success: '#00ff00'
+            };
+            
+            const logDiv = document.createElement('div');
+            logDiv.style.color = colors[type] || colors.info;
+            logDiv.style.marginBottom = '5px';
+            logDiv.textContent = logEntry;
+            
+            if (debugContent.children.length === 1 && debugContent.children[0].textContent.includes('Логи появятся')) {
+                debugContent.innerHTML = '';
+            }
+            
+            debugContent.appendChild(logDiv);
+            debugContent.scrollTop = debugContent.scrollHeight;
+        }
+        
+        // Открытие/закрытие модального окна
+        debugBtn.onclick = () => {
+            debugModal.style.display = 'block';
+            debugLog('🔍 Debug panel opened', 'info');
+        };
+        
+        closeDebug.onclick = () => {
+            debugModal.style.display = 'none';
+        };
+        
+        clearLogs.onclick = () => {
+            debugLogs = [];
+            debugContent.innerHTML = '<div style="color: #888;">Логи очищены. Новые логи появятся здесь...</div>';
+            debugLog('🗑️ Logs cleared', 'warn');
+        };
+        
+        copyLogs.onclick = () => {
+            const allLogs = debugLogs.join('\n');
+            navigator.clipboard.writeText(allLogs).then(() => {
+                alert('✅ Логи скопированы в буфер обмена!');
+            }).catch(() => {
+                alert('❌ Не удалось скопировать логи');
+            });
+        };
+        
+        // Перехват ошибок
+        window.onerror = function(message, source, lineno, colno, error) {
+            debugLog(`❌ ERROR: ${message} at ${source}:${lineno}:${colno}`, 'error');
+            return false;
+        };
+        
+        window.addEventListener('unhandledrejection', function(event) {
+            debugLog(`❌ Unhandled Promise: ${event.reason}`, 'error');
         });
+        
+        // Детальное логирование для отладки
+        debugLog('🚀 Pregner.pro - Initialization started', 'success');
+        debugLog(`📱 Device: ${navigator.userAgent}`, 'info');
+        debugLog(`📏 Screen: ${window.innerWidth}x${window.innerHeight}`, 'info');
+        debugLog(`🔄 Pixel Ratio: ${window.devicePixelRatio}`, 'info');
         
         // Модальное окно курсов
         function openModal() {
-            console.log('📖 Opening courses modal');
+            debugLog('📖 Opening courses modal', 'info');
             document.getElementById('coursesModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            console.log('✅ Modal opened successfully');
+            debugLog('✅ Modal opened successfully', 'success');
         }
         
         function closeModal() {
-            console.log('❌ Closing courses modal');
+            debugLog('❌ Closing courses modal', 'warn');
             document.getElementById('coursesModal').classList.remove('active');
             document.body.style.overflow = 'auto';
-            console.log('✅ Modal closed successfully');
+            debugLog('✅ Modal closed successfully', 'success');
         }
         
         // Закрытие по клику вне модального окна
@@ -1381,18 +1482,53 @@
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const target = document.querySelector(targetId);
-                console.log(`🎯 Navigation clicked: ${targetId}`);
+                
+                debugLog(`🎯 Click on: ${targetId}`, 'info');
+                
                 if (target) {
-                    console.log('✅ Target found, scrolling...');
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    const nav = document.querySelector('nav');
+                    const navHeight = nav.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    // Прокручиваем так, чтобы секция была хорошо видна ниже навигации
+                    const offsetPosition = targetPosition - navHeight - 50;
+                    
+                    debugLog(`✅ Target found: ${targetId}`, 'success');
+                    debugLog(`📏 Nav height: ${navHeight}px`, 'info');
+                    debugLog(`📍 Target absolute position: ${targetPosition}px`, 'info');
+                    debugLog(`📍 Target visible top: ${target.getBoundingClientRect().top}px`, 'info');
+                    debugLog(`🎯 Will scroll to: ${offsetPosition}px`, 'info');
+                    debugLog(`📊 Current scroll: ${window.pageYOffset}px`, 'info');
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        const nav = document.querySelector('nav');
+                        const currentNavHeight = nav.offsetHeight;
+                        const finalScroll = window.pageYOffset;
+                        const finalTargetTop = target.getBoundingClientRect().top;
+                        const isVisible = finalTargetTop > currentNavHeight && finalTargetTop < (window.innerHeight - 100);
+                        
+                        debugLog(`✔️ Scrolled to: ${finalScroll}px`, 'success');
+                        debugLog(`📏 Current nav height: ${currentNavHeight}px`, 'info');
+                        debugLog(`📍 Section now at: ${finalTargetTop}px from top`, 'info');
+                        debugLog(`📺 Window height: ${window.innerHeight}px`, 'info');
+                        debugLog(`🔍 Section visible: ${isVisible ? 'YES ✅' : 'NO ❌'}`, isVisible ? 'success' : 'error');
+                        
+                        if (!isVisible) {
+                            debugLog(`⚠️ Section hidden! Need to scroll ${currentNavHeight - finalTargetTop}px more`, 'warn');
+                        }
+                    }, 1000);
                 } else {
-                    console.warn('⚠️ Target not found:', targetId);
+                    debugLog(`❌ Target not found: ${targetId}`, 'error');
                 }
             });
-            console.log(`  ✓ Smooth scroll handler attached to link ${index + 1}: ${anchor.getAttribute('href')}`);
         });
         
-        console.log('✅ Smooth scroll initialized');
+        debugLog('✅ Smooth scroll initialized', 'success');
         
         // Проверка загрузки изображений
         window.addEventListener('load', function() {
@@ -1428,8 +1564,60 @@
             });
         });
         
-        console.log('✅ All event listeners initialized');
-        console.log('🏁 Pregner.pro - Initialization complete!');
+        debugLog('✅ All event listeners initialized', 'success');
+        
+        // Активное состояние навигации при прокрутке
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+        const sections = document.querySelectorAll('section[id]');
+        const nav = document.querySelector('nav');
+        
+        function setActiveLink() {
+            let current = '';
+            const scrollPosition = window.scrollY + 150;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Эффект прокрутки для навигации
+        let lastScroll = 0;
+        function handleNavScroll() {
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        }
+        
+        window.addEventListener('scroll', () => {
+            setActiveLink();
+            handleNavScroll();
+        });
+        
+        // Инициализация при загрузке
+        setActiveLink();
+        handleNavScroll();
+        
+        debugLog('✨ Navigation enhancements initialized', 'success');
+        debugLog('🏁 Pregner.pro - Initialization complete!', 'success');
     </script>
 </body>
 </html>

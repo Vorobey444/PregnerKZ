@@ -563,8 +563,8 @@
         }
         
         .section-content.hidden {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .section-content.visible {
@@ -670,8 +670,8 @@
         }
         
         .skill-card.hidden {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .skill-card::before {
@@ -921,22 +921,16 @@
             }
             
             .skill-card {
-                padding: 30px 20px;
-                max-height: none;
-                overflow: visible;
+                padding: 35px 25px;
             }
             
             .skill-title {
-                font-size: 20px;
-                margin-bottom: 15px;
+                font-size: 22px;
             }
             
             .skill-desc {
-                font-size: 13px;
-                line-height: 1.6;
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
+                font-size: 14px;
+                line-height: 1.7;
             }
             
             .skill-icon {
@@ -1500,17 +1494,8 @@
         const sectionContents = document.querySelectorAll('.section-content');
         debugLog(`📋 Found ${sectionContents.length} sections to observe`, 'info');
         
-        // Добавляем класс hidden только к секциям, которые не в viewport
+        // Все секции видны по умолчанию
         sectionContents.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-            
-            if (!isInViewport) {
-                section.classList.add('hidden');
-                const cards = section.querySelectorAll('.skill-card');
-                cards.forEach(card => card.classList.add('hidden'));
-            }
-            
             observer.observe(section);
         });
         

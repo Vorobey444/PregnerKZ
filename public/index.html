@@ -1053,9 +1053,9 @@
             </div>
             <div class="nav-links">
                 <a href="#about">Обо мне</a>
-                <a href="#skills">Чем я помогаю</a>
+                <a class="courses-button" onclick="openSkillsModal()">Чем я помогаю</a>
                 <a href="#contact">Контакты</a>
-                <a class="courses-button" onclick="openModal()">Мои курсы</a>
+                <a class="courses-button" onclick="openCoursesModal()">Мои курсы</a>
             </div>
         </div>
     </nav>
@@ -1063,7 +1063,7 @@
     <!-- Модальное окно с курсами -->
     <div id="coursesModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeCoursesModal()">&times;</span>
             <h2>🎓 Мои курсы</h2>
             <p class="about-text" style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
                 Авторские программы обучения для РОПов и менеджеров продаж.<br>
@@ -1104,59 +1104,10 @@
         </div>
     </div>
     
-    <!-- Главный экран -->
-    <header>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Жанна Прегнер</h1>
-                <div class="subtitle">Профессиональный РОП</div>
-                <p class="tagline">
-                    Строю систему продаж с нуля.<br>
-                    Перезапускаю команды. Обучаю менеджеров продавать сильнее.<br>
-                    Меняю мышление менеджеров: не «звоню», а «веду клиента».<br>
-                    Выстраиваю дисциплину, процессы и контроль.<br>
-                    Довожу отделы до выполнения плана.<br>
-                    Вывожу бизнес на стабильный рост.
-                </p>
-                <a href="#skills" class="cta-button">Начать работу</a>
-            </div>
-            <div class="hero-photo">
-                <img src="images/photo.jpg" alt="Жанна Прегнер">
-            </div>
-        </div>
-        <div class="scroll-indicator">↓</div>
-    </header>
-    
-    <!-- Обо мне -->
-    <section id="about">
-        <div class="section-content">
-            <h2>🎯 Обо мне</h2>
-            <div class="about-content">
-                <div class="about-photo">
-                    <img src="images/photo.jpg" alt="Жанна Прегнер">
-                </div>
-                <div class="about-info">
-                    <p class="about-text">
-                        Я — руководитель отдела продаж с многолетним опытом построения эффективных команд 
-                        и внедрения инновационных стратегий продаж.
-                    </p>
-                    <p class="about-text">
-                        Моя специализация — создание прибыльных систем продаж с нуля, масштабирование бизнеса 
-                        и достижение амбициозных KPI. Работаю с современными инструментами и технологиями, 
-                        всегда в курсе трендов рынка.
-                    </p>
-                    <p class="about-text">
-                        Верю, что успешные продажи — это искусство понимания клиента и создания ценности. 
-                        Мой подход основан на данных, креативности и человечности.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Чем я помогаю -->
-    <section id="skills">
-        <div class="section-content">
+    <!-- Модальное окно "Чем я помогаю" -->
+    <div id="skillsModal" class="modal">
+        <div class="modal-content" style="max-width: 1400px;">
+            <span class="close-modal" onclick="closeSkillsModal()">&times;</span>
             <h2>⚡ Чем я помогаю</h2>
             
             <p class="about-text" style="text-align: center; max-width: 900px; margin: 0 auto 30px; font-size: 18px; line-height: 1.8;">
@@ -1254,29 +1205,80 @@
                         • Формирую психологию влияния и поведения лидера<br>
                         • Делаю отдел управляемым и предсказуемым<br><br>
                         <strong style="color: #D4AF37;">Результат:</strong><br>
-                        РОП становится сильным руководителем, а отдел — стабильным инструментом продаж.
+                        Отдел работает без хаоса, РОП чувствует себя уверенным лидером.<br>
+                        Конверсия растёт, процессы понятны, контроль налажен.
                     </div>
                 </div>
             </div>
-            
-            <div style="margin-top: 60px; padding: 40px; background: rgba(212, 175, 55, 0.05); border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.2);">
-                <h3 style="font-family: 'Cormorant', serif; font-size: 32px; color: #D4AF37; text-align: center; margin-bottom: 25px;">⚙️ Как мы начинаем работу</h3>
-                <p class="about-text" style="text-align: center; font-size: 17px; line-height: 2; margin-bottom: 0;">
-                    Определяем задачу → Выбираем формат (курс / курс + практика / внедрение) → Стартуем → Контролируем → Растём по цифрам
+        </div>
+    </div>
+    
+    <!-- Главный экран -->
+    <header>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Жанна Прегнер</h1>
+                <div class="subtitle">Профессиональный РОП</div>
+                <p class="tagline">
+                    Строю систему продаж с нуля.<br>
+                    Перезапускаю команды. Обучаю менеджеров продавать сильнее.<br>
+                    Меняю мышление менеджеров: не «звоню», а «веду клиента».<br>
+                    Выстраиваю дисциплину, процессы и контроль.<br>
+                    Довожу отделы до выполнения плана.<br>
+                    Вывожу бизнес на стабильный рост.
                 </p>
+                <a onclick="openSkillsModal()" class="cta-button" style="cursor: pointer;">Чем я помогаю</a>
             </div>
-            
-            <div style="margin-top: 40px; padding: 40px; background: rgba(255, 255, 255, 0.02); border-radius: 20px; border: 1px solid rgba(198, 166, 103, 0.25);">
-                <h3 style="font-family: 'Cormorant', serif; font-size: 32px; color: #D4AF37; text-align: center; margin-bottom: 20px;">🎯 Главное</h3>
-                <p class="about-text" style="text-align: center; font-size: 17px; line-height: 1.9; margin-bottom: 30px;">
-                    Это не мотивация.<br>
-                    Это практика — 80%, психология + система.<br>
-                    Поэтому менеджеры начинают продавать, а не просто "учиться".
-                </p>
-                <div style="text-align: center;">
-                    <a onclick="openModal()" class="cta-button" style="cursor: pointer; display: inline-block;">👉 Перейти к программе курса</a>
+            <div class="hero-photo">
+                <img src="images/photo.jpg" alt="Жанна Прегнер">
+            </div>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </header>
+    
+    <!-- Обо мне -->
+    <section id="about">
+        <div class="section-content">
+            <h2>🎯 Обо мне</h2>
+            <div class="about-content">
+                <div class="about-photo">
+                    <img src="images/photo.jpg" alt="Жанна Прегнер">
+                </div>
+                <div class="about-info">
+                    <p class="about-text">
+                        Я — руководитель отдела продаж с многолетним опытом построения эффективных команд 
+                        и внедрения инновационных стратегий продаж.
+                    </p>
+                    <p class="about-text">
+                        Моя специализация — создание прибыльных систем продаж с нуля, масштабирование бизнеса 
+                        и достижение амбициозных KPI. Работаю с современными инструментами и технологиями, 
+                        всегда в курсе трендов рынка.
+                    </p>
+                    <p class="about-text">
+                        Верю, что успешные продажи — это искусство понимания клиента и создания ценности. 
+                        Мой подход основан на данных, креативности и человечности.
+                    </p>
                 </div>
             </div>
+        </div>
+    </section>
+    
+    <!-- Чем я помогаю -->
+    <section id="skills">
+        <div class="section-content">
+            <h2>⚡ Чем я помогаю</h2>
+            
+            <p class="about-text" style="text-align: center; max-width: 900px; margin: 0 auto 40px; font-size: 18px; line-height: 1.8;">
+                Главное — обучаю продажам так, чтобы менеджеры давали результат уже в первый месяц.<br>
+                Без "мотиваторов", без воды, без сказок — только система, практика и психология влияния.
+            </p>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <a onclick="openSkillsModal()" class="cta-button" style="cursor: pointer; display: inline-block; font-size: 20px; padding: 20px 50px;">Узнать подробнее</a>
+            </div>
+            
+            <div class="skills-grid" style="display: none;">
+
         </div>
     </section>
     
@@ -1431,34 +1433,60 @@
         debugLog(`🔄 Pixel Ratio: ${window.devicePixelRatio}`, 'info');
         
         // Модальное окно курсов
-        function openModal() {
+        function openCoursesModal() {
             debugLog('📖 Opening courses modal', 'info');
             document.getElementById('coursesModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            debugLog('✅ Modal opened successfully', 'success');
+            debugLog('✅ Courses modal opened successfully', 'success');
         }
         
-        function closeModal() {
+        function closeCoursesModal() {
             debugLog('❌ Closing courses modal', 'warn');
             document.getElementById('coursesModal').classList.remove('active');
             document.body.style.overflow = 'auto';
-            debugLog('✅ Modal closed successfully', 'success');
+            debugLog('✅ Courses modal closed successfully', 'success');
+        }
+        
+        // Модальное окно "Чем я помогаю"
+        function openSkillsModal() {
+            debugLog('📖 Opening skills modal', 'info');
+            document.getElementById('skillsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            debugLog('✅ Skills modal opened successfully', 'success');
+        }
+        
+        function closeSkillsModal() {
+            debugLog('❌ Closing skills modal', 'warn');
+            document.getElementById('skillsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            debugLog('✅ Skills modal closed successfully', 'success');
         }
         
         // Закрытие по клику вне модального окна
         window.onclick = function(event) {
-            const modal = document.getElementById('coursesModal');
-            if (event.target == modal) {
-                console.log('🖱️ Modal closed by outside click');
-                closeModal();
+            const coursesModal = document.getElementById('coursesModal');
+            const skillsModal = document.getElementById('skillsModal');
+            if (event.target == coursesModal) {
+                console.log('🖱️ Courses modal closed by outside click');
+                closeCoursesModal();
+            } else if (event.target == skillsModal) {
+                console.log('🖱️ Skills modal closed by outside click');
+                closeSkillsModal();
             }
         }
         
         // Закрытие по Escape
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                console.log('⌨️ Modal closed by Escape key');
-                closeModal();
+                const coursesModal = document.getElementById('coursesModal');
+                const skillsModal = document.getElementById('skillsModal');
+                if (coursesModal.classList.contains('active')) {
+                    console.log('⌨️ Courses modal closed by Escape key');
+                    closeCoursesModal();
+                } else if (skillsModal.classList.contains('active')) {
+                    console.log('⌨️ Skills modal closed by Escape key');
+                    closeSkillsModal();
+                }
             }
         });
         
